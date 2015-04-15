@@ -38,7 +38,7 @@ gulp.task 'stylus', ['clean:css'], () ->
 
   stylus = require 'gulp-stylus'
 
-  gulp.src ["source/assets/stylus/**/*.styl"]
+  gulp.src ["source/assets/stylus/**/!(_)*.styl"]
     .pipe(plumber())
     .pipe stylus
       compress: true
@@ -81,6 +81,14 @@ gulp.task 'jade', ['clean:html'], () ->
 gulp.task 'copy:meta', () ->
   gulp.src ['source/package.json']
     .pipe(gulp.dest('release/src'))
+
+gulp.task 'copy:image', () ->
+  gulp.src ['source/assets/image/**/*']
+    .pipe(gulp.dest('release/src/image'))
+
+gulp.task 'copy:bower', () ->
+  gulp.src ['bower_components/**']
+    .pipe(gulp.dest('release/src/vendor'))
 
 # Release Task
 gulp.task 'release', ['copy:meta'], () ->
