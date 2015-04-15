@@ -15,16 +15,21 @@ git clone `git@github.com:katsew/nw-scaffold.git`
 
 ## 4. Start creating your app!
 
-### directories in source
+### resources in source
 
-`views/` is for Jade and compiled html will be output into `release/src/`.  
-`coffee/` is for CoffeeScript and its file will browserify and be output into `release/src/js/`.  
-`coffee/modules/` is for CoffeeScript modules. It expect to be required by `coffee/main.coffee` then browserified.  
+`views/` is for Jade and compiled html will be output into `release/src/`.
+create `package.json` for your app.
+(cf. Installation step 3)
+
+### resources in source/assets
+
+`coffee/` is for CoffeeScript and its file will browserify and be output into `release/src/js/`.
+`coffee/modules/` is for CoffeeScript modules. It expect to be required by `coffee/main.coffee` then browserified.
 `stylus/` is for Stylus and compiled css will be output into `release/src/css/`.
 
 ### tasks
 
-`gulp watch` will watch all resources (except image) and compile to `release/src`.  
+`gulp watch` will watch all resources (except image) and compile to `release/src`.
 `gulp release` will create node-webkit app for your project, then output into `release/bin`.
 
 
