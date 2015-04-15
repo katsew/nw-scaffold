@@ -17,8 +17,8 @@ git clone `git@github.com:katsew/nw-scaffold.git`
 
 ### resources in source
 
-`views/` is for Jade and compiled html will be output into `release/src/`.
-create `package.json` for your app.
+`views/` is for Jade and compiled html will be output into `release/src/`.  
+create `package.json` on this directory for your app.  
 (cf. Installation step 3)
 
 ### resources in source/assets
