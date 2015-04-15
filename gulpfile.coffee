@@ -1,6 +1,7 @@
 gulp = require 'gulp'
 watch = require 'gulp-watch'
 plumber = require 'gulp-plumber'
+gshell = require 'gulp-shell'
 
 runSequence = require 'run-sequence'
 del = require 'del'
@@ -8,14 +9,18 @@ del = require 'del'
 # Watch changing files
 gulp.task 'watch', () ->
   watch ["source/assets/coffee/**/*.coffee"], () ->
-    gulp.start 'coffee'
+    gulp.start ['coffee', 'test:app']
 
   watch ["source/views/**/!(_)*.jade"], () ->
-    gulp.start 'jade'
+    gulp.start ['jade', 'test:app']
 
-  watch ["source/assets/stylus/**/!(_)*.stylus"], () ->
-    gulp.start 'stylus'
+  watch ["source/assets/stylus/**/!(_)*.styl"], () ->
+    gulp.start ['stylus', 'test:app']
 
+# Test
+gulp.task 'test:app', () ->
+  gulp.src './'
+    .pipe(gshell '/Applications/node-webkit.app/Contents/MacOS/node-webkit ./release/src')
 
 # Clean Resources
 gulp.task 'clean:js', (cb) ->
@@ -26,6 +31,18 @@ gulp.task 'clean:css', (cb) ->
 
 gulp.task 'clean:html', (cb) ->
   del("release/src/*.html", null, cb)
+
+
+# Compile Stylus
+gulp.task 'stylus', ['clean:css'], () ->
+
+  stylus = require 'gulp-stylus'
+
+  gulp.src ["source/assets/stylus/**/*.styl"]
+    .pipe(plumber())
+    .pipe stylus
+      compress: true
+    .pipe(gulp.dest("release/src/css"))
 
 
 # Compile CoffeeScript
