@@ -55,7 +55,9 @@ gulp.task 'coffee', ['clean:js'], () ->
     entries: ['./source/assets/coffee/main.coffee']
     debug: true,
     extensions: ['.coffee'],
-    transform: ['coffeeify']
+    transform: ['coffeeify'],
+    detectGlobals: false,
+    builtins: []
   )
   .bundle()
   .pipe(plumber())
